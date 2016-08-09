@@ -2,6 +2,7 @@
 title: Test
 date: 2016-07-12 11:52:13
 tags: [HelloWorld, Test]
+categories: "Test categories"
 ---
 
 # This is title
