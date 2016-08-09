@@ -9,7 +9,7 @@ description: 这是一个描述！
 author: Hello World
 language: en
 timezone:
-avatar: https://avatars2.githubusercontent.com/u/3097366?v=3&u=5d31be44dfe8686112eb0b6fcdf5c8fbbece0a1d&s=140
+avatar: /avatar.JPG 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
