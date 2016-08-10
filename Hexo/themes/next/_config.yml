@@ -14,7 +14,7 @@ keywords: "Hexo, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2016
 
 
 
@@ -43,7 +43,7 @@ menu_icons:
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
   home: home
   about: user
-  categories: th
+  categories: th-list
   tags: tags
   archives: archive
   commonweal: heartbeat
@@ -118,7 +118,9 @@ font:
 # Key is the link label showing to end users.
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
 social:
-  Github: https://github.com/raykle
+  GitHub: https://github.com/raykle
+  Coding: https://coding.net/u/raykle
+  Weibo: http://weibo.com/raykle
 
 
 # Social Links Icons
@@ -133,6 +135,7 @@ social_icons:
   GitHub: github
   Twitter: twitter
   Weibo: weibo
+  Coding: code
 
 
 # Sidebar Avatar
@@ -238,7 +241,7 @@ mathjax:
 baidu_analytics: cae43af16865b3356fe8a1c89dd88f5c
 
 # Duoshuo ShortName
-#duoshuo_shortname:
+#duoshuo_shortname:raykle
 
 # Disqus
 #disqus_shortname:

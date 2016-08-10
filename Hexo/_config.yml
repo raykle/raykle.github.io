@@ -7,7 +7,7 @@ title: Ray 的技术博客
 subtitle:
 description: (╯°□°）╯︵ ┻━┻
 author: Raykle
-language: en
+language: zh-Hans
 timezone:
 avatar: /avatar.JPG 
 
@@ -74,3 +74,5 @@ deploy:
   repo:
     github: https://github.com/raykle/raykle.github.io.git,master
     coding: git@git.coding.net:raykle/raykle.git,master
+
+duoshuo_shortname: raykle
