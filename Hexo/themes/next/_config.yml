@@ -276,9 +276,9 @@ baidu_analytics: cae43af16865b3356fe8a1c89dd88f5c
 # you can visit http://dev.duoshuo.com get duoshuo user id.
 duoshuo_info:
   ua_enable: true
-  admin_enable: false
-  user_id: 0
-  #admin_nickname: Author
+  admin_enable: true
+  user_id: 14057453
+  admin_nickname: Author
 
 
 # Facebook SDK Support.
