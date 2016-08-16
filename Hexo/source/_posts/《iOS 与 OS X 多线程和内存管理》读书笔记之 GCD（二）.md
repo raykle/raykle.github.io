@@ -254,7 +254,7 @@ long result = dispatch_group_wait(group, DISPATCH_TIME_NOW);
 
 ---
 
-## dispatch_sync
+## dispatch_sync & 死锁问题
 
 > 既然有“async”，当然也有“sync”，即 `dispatch_sync` 函数。它意味着“同步”（synchonous），也就是将指定的 Block “同步”追加到制定的 Dispatch Queue 中。在追加 Block 执行结束之前，dispatch_sync 函数会一直等待。
 > **"等待" 意味着 `当前线程停止`。**
