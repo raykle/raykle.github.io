@@ -3,10 +3,8 @@ title: 《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（一）
 date: 2016-08-16 11:43:41
 tags: [iOS, GCD]
 categories: "iOS"
-description: 
+description: "该篇内容是在阅读《iOS 与 OS X 多线程和内存管理》这本书时做的笔记，加入了一些自己的理解说明和测试 demo，方便查阅。"
 ---
-
-> 该系列内容是在读《iOS 与 OS X 多线程和内存管理》这本书时做的笔记，加入了一些自己的理解说明和测试 demo，方便查阅。
 
 <!-- more -->
 

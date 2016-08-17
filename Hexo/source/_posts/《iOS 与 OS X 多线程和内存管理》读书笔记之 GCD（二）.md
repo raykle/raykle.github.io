@@ -3,11 +3,12 @@ title: 《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（二）
 date: 2016-08-16 11:44:41
 tags: [iOS, GCD]
 categories: "iOS"
+description: "第二篇 GCD 笔记 : )"
 ---
 
-> 该系列内容是在读《iOS 与 OS X 多线程和内存管理》这本书时做的笔记，加入了一些自己的理解说明和测试 demo，方便查阅。
+> [第一篇基础篇请戳这里 👈](/2016/08/16/《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（一）/)
 
-<!-- more -->
+---
 
 ## dispatch_set_target_queue
 
@@ -70,7 +71,7 @@ dispatch_set_target_queue 中第一个参数为指定要变更执行优先级的
 }
 ```
 
-输出；
+输出：
 
 ```
 2016-05-27 15:31:24.630 GCD_Demo[2540:25b] target queue in
@@ -293,7 +294,7 @@ Serial Dispatch Queue 也会引起相同的问题。
 ```objc
 dispatch_queue_t queue = dispatch_queue_create("com.gcd.serialDispatchQueue", NULL);
 dispatch_async(queue, ^{
-    dispatch_sync(queue, ^{NSLog(@"Hello?");});// 无法输出 Hello?
+    dispatch_sync(queue, ^{NSLog(@"Hello?");});// 无法输出 “Hello?”
 });
 ```
 
@@ -420,7 +421,7 @@ Sample:
                 NSLog(@"==========changed========");
             }
         }
-		//执行完毕之后，信号量进行 +1 处理
+        //执行完毕之后，信号量进行 +1 处理
         dispatch_semaphore_signal(semaphore);
     });
 

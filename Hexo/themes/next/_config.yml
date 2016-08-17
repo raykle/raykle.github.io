@@ -1,3 +1,7 @@
+# NexT configuration
+# Docs: http://theme-next.iissnan.com/
+# Source: https://github.com/iissnan/hexo-theme-next
+
 # ---------------------------------------------------------------
 # Site Information Settings
 # ---------------------------------------------------------------
@@ -6,7 +10,7 @@
 favicon: /favicon.png
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "NexT, Ray, Raykle, Blog, 博客, 技术, Ray 的技术博客, iOS, Mac, macOS"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -155,7 +159,7 @@ toc:
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
 # Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
-#creative_commons: by-nc-sa
+creative_commons: by-nc-sa
 #creative_commons:
 
 
@@ -199,13 +203,14 @@ custom_logo:
 
 # Code Highlight theme
 # Available value:
-#    normal | night | night eighties | night blue | night bright
+#    normal | night | night eighties | night blue | night bright | solarized dark for ray
+#    "solarized dark for ray" is a custom theme made by Ray refer to the theme "solarized dark"
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night eighties
+highlight_theme: solarized dark for ray
 
 
 # Automatically scroll page to section which is under <!-- more --> mark.
-scroll_to_more: true
+scroll_to_more: false
 
 
 # Automatically Excerpt. Not recommand.
