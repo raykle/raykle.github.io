@@ -6,7 +6,12 @@ categories: "iOS"
 description: "该篇内容是在阅读《iOS 与 OS X 多线程和内存管理》这本书时做的笔记，加入了一些自己的理解说明和测试 demo，方便查阅。"
 ---
 
-<!-- more -->
+
+![](https://images-cn-8.ssl-images-amazon.com/images/I/41YrwH3BeHL._SX446_BO1,204,203,200_.jpg)
+{% cq %}
+书籍链接：[Objective-C 高级编程: iOS 与 OS X 多线程和内存管理](https://www.amazon.cn/Objective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B-iOS%E4%B8%8EOS-X%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E5%9D%82%E6%9C%AC%E4%B8%80%E6%A0%91/dp/B00DE60G3S/ref=sr_1_1?ie=UTF8&qid=1471501826&sr=8-1&keywords=iOS+%E4%B8%8E+OS+X+%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86)
+{% endcq %}
+
 
 ## 几个概念
 
