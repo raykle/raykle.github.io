@@ -3,11 +3,10 @@ title: 《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（一）
 date: 2016-08-16 11:43:41
 tags: [iOS, GCD]
 categories: "iOS"
-description: "该篇内容是在阅读《iOS 与 OS X 多线程和内存管理》这本书时做的笔记，加入了一些自己的理解说明和测试 demo，方便查阅。"
+description: "该篇内容是在阅读《iOS 与 OS X 多线程和内存管理》时做的笔记，加入了一些自己的理解说明和测试 demo，方便查阅。"
 ---
 
 
-![](https://images-cn-8.ssl-images-amazon.com/images/I/41YrwH3BeHL._SX446_BO1,204,203,200_.jpg)
 {% cq %}
 书籍链接：[Objective-C 高级编程: iOS 与 OS X 多线程和内存管理](https://www.amazon.cn/Objective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B-iOS%E4%B8%8EOS-X%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86-%E5%9D%82%E6%9C%AC%E4%B8%80%E6%A0%91/dp/B00DE60G3S/ref=sr_1_1?ie=UTF8&qid=1471501826&sr=8-1&keywords=iOS+%E4%B8%8E+OS+X+%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86)
 {% endcq %}
@@ -93,8 +92,8 @@ block 3
 
 关于 Serial Dispatch Queue 生成个数的注意事项：
 
-> 使用 dispatch_queue_create 函数可生成任意多个 Dispatch Queue，当生成多个 Serial Dispatch Queue 时，各个 Serial Dispatch Queue 将 ***并行执行***。虽然在一个 Serial Dispatch Queue 中同时只能执行一个追加处理，但如果将处理分别追加到4个 Serial Dispatch Queue 中，各个 Serial Dispatch Queue 执行一个，即为 ***同时执行4个处理***。
-> 一旦生成 Serial Dispatch Queue 并追加处理，系统对于一个 Serial Dispatch Queue 就只生成并使用一个线程。如果生成 2000 个 Serial Dispatch Queue，那么就生成 2000 个线程。*过多使用多线程，就会消耗大量内存，引起大量的上下文切换，大幅度降低系统的响应性能。*
+- 使用 dispatch_queue_create 函数可生成任意多个 Dispatch Queue，当生成多个 Serial Dispatch Queue 时，各个 Serial Dispatch Queue 将 ***并行执行***。虽然在一个 Serial Dispatch Queue 中同时只能执行一个追加处理，但如果将处理分别追加到4个 Serial Dispatch Queue 中，各个 Serial Dispatch Queue 执行一个，即为 ***同时执行4个处理***。
+- 一旦生成 Serial Dispatch Queue 并追加处理，系统对于一个 Serial Dispatch Queue 就只生成并使用一个线程。如果生成 2000 个 Serial Dispatch Queue，那么就生成 2000 个线程。*过多使用多线程，就会消耗大量内存，引起大量的上下文切换，大幅度降低系统的响应性能。*
 
 使用方法：
 

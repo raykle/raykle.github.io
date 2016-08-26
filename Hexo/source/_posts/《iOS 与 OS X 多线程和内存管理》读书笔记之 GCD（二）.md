@@ -6,7 +6,7 @@ categories: "iOS"
 description: "第二篇 GCD 笔记 : )"
 ---
 
-> [第一篇基础篇请戳这里 👈](/2016/08/16/《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（一）/)
+> [第一篇基础篇 👈](/2016/08/16/《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（一）/)
 
 ---
 
@@ -208,9 +208,9 @@ long result = dispatch_group_wait(group, DISPATCH_TIME_NOW);
         NSLog(@"blk3_for_reading");
     });
 	
-	// 此处会等待已经追加到 concurrentQueue 中的 block 操作全部执行完成，
-	// 再调用 dispatch_barrier_async 函数。
-	dispatch_barrier_async(concurrentQueue, ^{
+    // 此处会等待已经追加到 concurrentQueue 中的 block 操作全部执行完成，
+    // 再调用 dispatch_barrier_async 函数。
+    dispatch_barrier_async(concurrentQueue, ^{
         NSLog(@"blk_for_writting");
     });
 
@@ -492,7 +492,7 @@ dispatch_once(&pred, ^{
 });
 ```
 
-> 单例模式，此源代码能够保证即使在多线程环境下执行，也是百分之百安全。
+> **单例模式**，此源代码能够保证即使在多线程环境下执行，也是百分之百安全。
 
 ---
 
