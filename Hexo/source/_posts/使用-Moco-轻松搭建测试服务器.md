@@ -4,12 +4,12 @@ date: 2016-09-03 17:13:17
 categories: 
     - "测试"
 tags: [服务器, 接口, 测试]
-description: "使用 Moco 轻松搭建一个简单的测试服务器，方便移动开发接口调试。"
+description: "使用 Moco 轻松搭建简单测试服务器，方便移动开发接口调试。"
 ---
 
 新公司的项目使用了 [RAP](http://rap.taobao.org/) 这一阿里推出的可视化接口管理工具，通过在上面定义接口，RAP 可以通过分析接口结构，以一系列自动化工具帮助开发人员提升效率。重要的是 RAP 通过 Mock 服务可以生成模拟数据。
 
-以上的这些都不是讨论的重点，本片文章主要是记录通过 Moco 与 RAP 配合使用，以达到在接口定义初期，就可以使用 Moco 在本地搭建的服务器调试接口，推进移动开发的进程。
+以上的这些都不是讨论的重点，本篇文章主要是记录如何通过使用 Moco 搭建本地服务器，以达到在接口定义初期，就可以通过 Moco 调试接口，推进移动开发的进程。
 
 ## Moco 介绍
 
@@ -27,8 +27,7 @@ https://repo1.maven.org/maven2/com/github/dreamhead/moco-runner/0.11.0/moco-runn
     ``` Json
     [
       {
-        "response" :
-          {
+        "response" : {
             "text" : "Hello World"
           }
       }
@@ -53,6 +52,9 @@ https://repo1.maven.org/maven2/com/github/dreamhead/moco-runner/0.11.0/moco-runn
     ---
 
 ## 进阶使用
+
+具体使用可参考 Moco 的 [官方文档](https://github.com/dreamhead/moco/blob/master/moco-doc/apis.md)
+
 ### description 字段作为注释
 
 ```Json
@@ -75,12 +77,10 @@ https://repo1.maven.org/maven2/com/github/dreamhead/moco-runner/0.11.0/moco-runn
 ```Json
 [
     {
-        "request" :
-        {
+        "request" : {
           "uri" : "/foo"
         },
-         "response" :
-        {
+         "response" : {
           "text" : "bar"
         }
     }
@@ -94,16 +94,13 @@ https://repo1.maven.org/maven2/com/github/dreamhead/moco-runner/0.11.0/moco-runn
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "uri" : "/foo",
-          "queries" : 
-            {
+          "queries" : {
               "param" : "blah"
             }
         },
-      "response" :
-        {
+      "response" : {
           "text" : "bar"
         }
     }
@@ -119,13 +116,11 @@ https://repo1.maven.org/maven2/com/github/dreamhead/moco-runner/0.11.0/moco-runn
 ```Json
 [
    {
-     "request" :
-       {
+     "request" : {
          "method" : "get",
          "uri" : "/foo"
        },
-     "response" :
-       {
+     "response" : {
          "text" : "bar"
        }
    }
@@ -140,16 +135,13 @@ GET 请求 `http://localhost:12306/foo` 获取到内容：bar。
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "method" : "post",
-          "headers" : 
-          {
+          "headers" : {
             "content-type" : "application/json"
           }
         },
-      "response" :
-        {
+      "response" : {
           "text" : "bar"
         }
     }
@@ -161,16 +153,13 @@ GET 请求 `http://localhost:12306/foo` 获取到内容：bar。
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "uri" : "/cookie",
-          "cookies" :
-            {
+          "cookies" : {
               "login" : "true"
             }
         },
-      "response" :
-        {
+      "response" : {
           "text" : "success"
         }
     }
@@ -182,16 +171,13 @@ GET 请求 `http://localhost:12306/foo` 获取到内容：bar。
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "method" : "post",
-          "forms" :
-            {
+          "forms" : {
               "name" : "foo"
             }
         },
-      "response" : 
-        {
+      "response" : {
           "text" : "bar"
         }
     }
@@ -204,16 +190,13 @@ XML 格式目前也还在流行着，配置方法如下：
 ```Json
 [
     {
-      "request": 
-        {
+      "request": {
           "uri": "/xml",
-          "text": 
-            {
+          "text": {
               "xml": "<request><parameters><id>1</id></parameters></request>"
             }
         },
-      "response": 
-        {
+      "response": {
           "text": "foo"
         }
     }
@@ -224,16 +207,13 @@ XML 格式目前也还在流行着，配置方法如下：
 ```Json
 [
     {
-       "request": 
-         {
+       "request": {
             "uri": "/xml",
-            "file": 
-              {
+            "file": {
                 "xml": "your_file.xml"
               }
         },
-      "response": 
-        {
+      "response": {
           "text": "foo"
         }
     }
@@ -268,15 +248,12 @@ XML 格式目前也还在流行着，配置方法如下：
 ```Json
 [
     {
-      "request": 
-        {
-          "uri": 
-            {
+      "request": {
+          "uri": {
               "match": "/\\w*/foo"
             }
         },
-      "response": 
-        {
+      "response": {
           "text": "bar"
         }
     }
@@ -289,17 +266,14 @@ XML 格式目前也还在流行着，配置方法如下：
 ```Json
 [
     {
-      "request":
-        {
-          "uri":
-            {
+      "request": {
+          "uri": {
               "startsWith": "/foo"
               //"endsWith": "foo"
               //"contain": "foo"
             }
         },
-      "response":
-        {
+      "response": {
           "text": "bar"
         }
     }
@@ -315,12 +289,10 @@ XML 格式目前也还在流行着，配置方法如下：
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "text" : "foo"
         },
-      "response" :
-        {
+      "response" : {
           "text" : "bar"
         }
     }
@@ -332,12 +304,10 @@ XML 格式目前也还在流行着，配置方法如下：
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "text" : "foo"
         },
-      "response" :
-        {
+      "response" : {
           "file" : "bar.response"
         }
     }
@@ -350,12 +320,10 @@ Moco 支持 HTTP 状态码的返回：
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "text" : "foo"
         },
-      "response" :
-        {
+      "response" : {
           "status" : 200
         }
     }
@@ -368,14 +336,11 @@ Moco 支持 HTTP 状态码的返回：
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "text" : "foo"
         },
-      "response" :
-        {
-          "headers" :
-            {
+      "response" : {
+          "headers" : {
               "content-type" : "application/json"
             }
         }
@@ -390,12 +355,10 @@ Moco 支持 HTTP 状态码的返回：
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "text" : "foo"
         },
-      "response" :
-        {
+      "response" : {
           "proxy" : "http://www.github.com"
         }
     }
@@ -410,14 +373,11 @@ Moco 支持 HTTP 状态码的返回：
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "text" : "foo"
         },
-      "response" :
-        {
-          "proxy" :
-            {
+      "response" : {
+          "proxy" : {
               "url" : "http://localhost:12306/unknown",
               "failover" : "failover.json"
             }
@@ -433,14 +393,11 @@ Moco 也支持 playback，支持将远程的 request 和 response 保存到本�
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "text" : "foo"
         },
-      "response" :
-        {
-          "proxy" :
-            {
+      "response" : {
+          "proxy" : {
               "url" : "http://localhost:12306/unknown",
               "playback" : "playback.json"
             }
@@ -454,8 +411,7 @@ Moco 也支持 playback，支持将远程的 request 和 response 保存到本�
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "uri" : "/redirect"
         },
       "redirectTo" : "http://www.github.com"
@@ -469,14 +425,11 @@ Cookie 同样可以放在 response 中。比如：
 ```Json
 [
     {
-      "request" :
-        {
+      "request" : {
           "uri" : "/cookie"
         },
-      "response" :
-        {
-          "cookies" :
-          {
+      "response" : {
+          "cookies" : {
             "login" : "true"
           }
         }
@@ -491,14 +444,11 @@ Cookie 同样可以放在 response 中。比如：
 ```Json
 [
     {
-        "request": 
-          {
+        "request": {
             "uri": "/json"
           },
-        "response": 
-          {
-            "json": 
-              {
+        "response": {
+            "json": {
                 "foo" : "bar"
               }
           }
@@ -508,4 +458,129 @@ Cookie 同样可以放在 response 中。比如：
 访问 `http://localhost:12306/json`，则会返回 json：`{"foo":"bar"}`
 
 ## 使用技巧
+### 配置文件
+简单地启动 moco 服务时是通过命令来启动的：
+
+```
+$ java -jar moco-runner-<version>-standalone.jar http -p 12306 -c foo.json
+```
+注意到这里有一个 `-c foo.json` ，此时只会将 `foo.json` 配置文件中的内容加载到服务中，如果仅仅通过以上的命令，则在调试多个接口时，需要不断的停止旧的服务、通过新的 json 配置文件启动新的服务，非常麻烦。
+
+> Moco 支持动态加载配置文件，无论是修改还是添加配置文件都是不需要重启服务的。
+
+#### 配置文件的设置技巧
+配置文件的格式为一个 **数组** 类型的 JSON 格式，数组的每一个元素是一个 `request/response` 的配对。比如：
+
+```Json
+[
+    {
+        // 此处配置了一个 request
+        "request" : {
+          "uri" : "/foo"
+        },
+        // 此处配置了对应于上方 request 的 response
+        "response" : {
+          "text" : "bar"
+        }
+    }
+]
+```
+> 一个 request/response 对，当中的 request 可以没有，则此时访问 `http://localhost:12306/` 时，Moco 就会直接将配置的 response 中的内容返回。
+
+上面说了配置文件内容是 **数组** 类型的，所以我们还可以这样写：
+
+```Json
+[
+    {
+        "request" : {
+          "uri" : "/foo"
+        },
+        "response" : {
+          "text" : "bar"
+        }
+    },
+    {
+        "request" : {
+          "uri" : "/foo2"
+        },
+        "response" : {
+          "text" : "bar2"
+        }
+    }
+]
+```
+此时我们加载了这个配置文件后，可以通过 `http://localhost:12306/foo` 和 `http://localhost:12306/foo2` 分别获取到 bar 和 bar2。这种对于需要测试的接口数量较少时，比较快速方便。
+
+#### 全局配置文件
+Moco 支持在全局的配置文件中引入其他配置文件，这样就可以分服务定义配置文件，便于管理。
+例如你有两个不同路径的 API：`http://xxx.com/path1/login` 和 `http://xxx.com/path2/pay` （登录和支付接口）。
+按照上一小节（4.1.1）所讲，我们可以写好 login 和 pay 的两个配置文件（或写在一起），分别设置 request 的 url 为 `/path1/login` 和 `/path2/pay` 。如果需要测试的接口很多，则不利于管理，且 path1、path2 这么混乱的分布于不同的配置文件中，对于以后想要更改也很不方便。
+
+正确的姿势应该是这样的：
+同样写好 login.json 和 pay.json 两个配置文件，然后写一个 **全局配置文件** ，配置如下：
+
+```Json
+// config.json
+[
+	{"context":"/path1", "include":"login.json"},
+	{"context":"/path2", "include":"pay.json"}
+]
+```
+login 和 pay 两个文件没有特殊要求，和之前的写法一样。比如：
+
+```Json
+// register.json
+[
+    {
+        "request": {
+            "uri": "/register",
+            "method": "POST",
+            "json": {
+                "phone":"18688886666",
+                "password":"123456"
+            }
+        },
+        "response": {
+            "json": {
+                "state":"0"
+            }
+        }
+    }
+]
+
+// login.json
+[
+    {
+        "request": {
+            "uri": "/login",
+            "method": "POST",
+            "json": {
+                "amount":"100"
+            }
+        },
+        "response": {
+            "json": {
+                "state":"0"
+            }
+        }
+    }
+]
+```
+
+然后启动 Moco 服务的命令是：
+
+```
+$ java -jar moco-runner-<version>-standalone.jar http -p 12306 -g config.json
+```
+要注意的是，最后指定的参数是 **`-g config.json`** !
+
+如果只是想引入多个 json 文件的话，全局配置文件中可以不实用 `context` 字段。比如：
+
+```Json
+// 不使用 context 字段的 config.json。
+[
+    {"include":"login.json"},
+    {"include":"pay.json"}
+]
+```
 
