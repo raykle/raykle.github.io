@@ -574,7 +574,7 @@ $ java -jar moco-runner-<version>-standalone.jar http -p 12306 -g config.json
 ```
 要注意的是，最后指定的参数是 **`-g config.json`** !
 
-如果只是想引入多个 json 文件的话，全局配置文件中可以不实用 `context` 字段。比如：
+如果只是想引入多个 json 文件的话，全局配置文件中可以不使用 `context` 字段。比如：
 
 ```Json
 // 不使用 context 字段的 config.json。
