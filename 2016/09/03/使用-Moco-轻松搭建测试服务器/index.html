@@ -1,0 +1,1115 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+  <meta name="baidu-site-verification" content="TrwBv9csqA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="服务器,接口,测试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="使用 Moco 轻松搭建简单测试服务器，方便移动开发接口调试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Moco 轻松搭建测试服务器">
+<meta property="og:url" content="http://raykle.coding.me/2016/09/03/使用-Moco-轻松搭建测试服务器/index.html">
+<meta property="og:site_name" content="Ray 的技术博客">
+<meta property="og:description" content="使用 Moco 轻松搭建简单测试服务器，方便移动开发接口调试。">
+<meta property="og:updated_time" content="2016-09-07T13:40:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Moco 轻松搭建测试服务器">
+<meta name="twitter:description" content="使用 Moco 轻松搭建简单测试服务器，方便移动开发接口调试。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: 14057453,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 使用 Moco 轻松搭建测试服务器 | Ray 的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cae43af16865b3356fe8a1c89dd88f5c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ray 的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Never taking more than you give.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用 Moco 轻松搭建测试服务器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-03T17:13:17+08:00" content="2016-09-03">
+              2016-09-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/测试/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/03/使用-Moco-轻松搭建测试服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/03/使用-Moco-轻松搭建测试服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/03/使用-Moco-轻松搭建测试服务器/" class="leancloud_visitors" data-flag-title="使用 Moco 轻松搭建测试服务器">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>新公司的项目使用了 <a href="http://rap.taobao.org/" target="_blank" rel="external">RAP</a> 这一阿里推出的可视化接口管理工具，通过在上面定义接口，RAP 可以通过分析接口结构，以一系列自动化工具帮助开发人员提升效率。重要的是 RAP 通过 Mock 服务可以生成模拟数据。</p>
+<p>以上的这些都不是讨论的重点，本篇文章主要是记录如何通过使用 Moco 搭建本地服务器，以达到在接口定义初期，就可以通过 Moco 调试接口，推进移动开发的进程。</p>
+<h2 id="Moco-介绍"><a href="#Moco-介绍" class="headerlink" title="Moco 介绍"></a>Moco 介绍</h2><p>Moco 是一个基于 Java 开发的开源项目，在 GitHub 上有不少的关注：<a href="https://github.com/dreamhead/moco" target="_blank" rel="external">https://github.com/dreamhead/moco</a></p>
+<blockquote>
+<p>Moco is an easy setup stub framework.</p>
+</blockquote>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><ol>
+<li><p>下载编译好的 Jar 文件，目前版本是 0.11.0：<br><a href="https://repo1.maven.org/maven2/com/github/dreamhead/moco-runner/0.11.0/moco-runner-0.11.0-standalone.jar" target="_blank" rel="external">https://repo1.maven.org/maven2/com/github/dreamhead/moco-runner/0.11.0/moco-runner-0.11.0-standalone.jar</a></p>
+<blockquote>
+<p>需要注意的是，之后在运行此 Jar 文件时，需要预先安装好 Java 的 JDK。如果不知道有没有安装过，可在下载完上面的 Jar 文件后，双击打开，如果没有任何提示的话，说明已经安装过 JDK，否则会有一个提示去下载的弹出框。JDK 下载地址为：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a> ，选择适合自己电脑系统的版本进行下载安装。</p>
+</blockquote>
+</li>
+<li><p>编写配置文件，像下面这个样子描述你的 Moco 服务的配置：</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"response"</span> : &#123;</span><br><span class="line">        <span class="attr">"text"</span> : <span class="string">"Hello World"</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p> 并命名为 foo.json 。</p>
+</li>
+<li><p>通过配置文件 foo.json 启动 Moco 服务<br> 在命令行输入：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java -jar moco-runner-&lt;version&gt;-standalone.jar http -p 12306 -c foo.json</span><br></pre></td></tr></table></figure>
+<p> 其中 <code>&lt;version&gt;</code> 替换为下载的 Jar 包的版本，此处为 <code>0.11.0</code> ，所以执行：<code>java -jar moco-runner-0.11.0-standalone.jar http -p 12306 -c foo.json</code> 。<br> -p 指定 Moco 服务端口。</p>
+<blockquote>
+<p>需要注意的是，执行以上的命令，需要先 cd 到 Jar 文件所在的目录，然后 foo.json 文件也需要放在同一个目录才行，否则会报错。或者可以通过使用 Jar 文件和 .json 文件绝对路径的方式也可以。<br>json 文件路径也可以使用相对路径，如：./json/foo.json</p>
+</blockquote>
+</li>
+<li><p>访问 Web 服务<br> 浏览器访问：<code>http://localhost:12306</code> ，就可以看到令人惊喜的 “Hello World” 了。: )</p>
+<hr>
+</li>
+</ol>
+<h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><p>具体使用可参考 Moco 的 <a href="https://github.com/dreamhead/moco/blob/master/moco-doc/apis.md" target="_blank" rel="external">官方文档</a></p>
+<h3 id="description-字段作为注释"><a href="#description-字段作为注释" class="headerlink" title="description 字段作为注释"></a>description 字段作为注释</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"description"</span>: <span class="string">"any response"</span>,</span><br><span class="line">        <span class="attr">"response"</span>: &#123;</span><br><span class="line">            <span class="attr">"text"</span>: <span class="string">"foo"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>在所有的 JSON APIs 中，使用 <code>description</code> 字段作为描述此配置的作用，在服务启动时此字段会被自动忽略掉。</p>
+<hr>
+<h3 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h3><h4 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"uri"</span> : <span class="string">"/foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">         <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:12306/foo</code> ,就可以获取到内容：bar。</p>
+<h4 id="Query-Parameter"><a href="#Query-Parameter" class="headerlink" title="Query Parameter"></a>Query Parameter</h4><p>带有参数的请求</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"uri"</span> : <span class="string">"/foo"</span>,</span><br><span class="line">          <span class="attr">"queries"</span> : &#123;</span><br><span class="line">              <span class="attr">"param"</span> : <span class="string">"blah"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:12306/foo?param=blah</code> 获取到内容：bar。</p>
+<h4 id="HTTP-Method"><a href="#HTTP-Method" class="headerlink" title="HTTP Method"></a>HTTP Method</h4><p>根据指定的 HTTP 方法返回 response ，也非常容易设置。<br>设置 GET 请求：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="attr">"request"</span> : &#123;</span><br><span class="line">         <span class="attr">"method"</span> : <span class="string">"get"</span>,</span><br><span class="line">         <span class="attr">"uri"</span> : <span class="string">"/foo"</span></span><br><span class="line">       &#125;,</span><br><span class="line">     <span class="attr">"response"</span> : &#123;</span><br><span class="line">         <span class="attr">"text"</span> : <span class="string">"bar"</span></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>GET 请求 <code>http://localhost:12306/foo</code> 获取到内容：bar。</p>
+<p>设置其他请求同理。</p>
+<h4 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"method"</span> : <span class="string">"post"</span>,</span><br><span class="line">          <span class="attr">"headers"</span> : &#123;</span><br><span class="line">            <span class="attr">"content-type"</span> : <span class="string">"application/json"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"uri"</span> : <span class="string">"/cookie"</span>,</span><br><span class="line">          <span class="attr">"cookies"</span> : &#123;</span><br><span class="line">              <span class="attr">"login"</span> : <span class="string">"true"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"success"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="Form"><a href="#Form" class="headerlink" title="Form"></a>Form</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"method"</span> : <span class="string">"post"</span>,</span><br><span class="line">          <span class="attr">"forms"</span> : &#123;</span><br><span class="line">              <span class="attr">"name"</span> : <span class="string">"foo"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h4><p>XML 格式目前也还在流行着，配置方法如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span>: &#123;</span><br><span class="line">          <span class="attr">"uri"</span>: <span class="string">"/xml"</span>,</span><br><span class="line">          <span class="attr">"text"</span>: &#123;</span><br><span class="line">              <span class="attr">"xml"</span>: <span class="string">"&lt;request&gt;&lt;parameters&gt;&lt;id&gt;1&lt;/id&gt;&lt;/parameters&gt;&lt;/request&gt;"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span>: &#123;</span><br><span class="line">          <span class="attr">"text"</span>: <span class="string">"foo"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>如果 XML 文件很大的话，可以放在一个 xml 文件中，然后通过引用文件路径的方式来发起请求：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="attr">"request"</span>: &#123;</span><br><span class="line">            <span class="attr">"uri"</span>: <span class="string">"/xml"</span>,</span><br><span class="line">            <span class="attr">"file"</span>: &#123;</span><br><span class="line">                <span class="attr">"xml"</span>: <span class="string">"your_file.xml"</span></span><br><span class="line">              &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span>: &#123;</span><br><span class="line">          <span class="attr">"text"</span>: <span class="string">"foo"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="JSON-Request"><a href="#JSON-Request" class="headerlink" title="JSON Request"></a>JSON Request</h4><h5 id="JSON-Text"><a href="#JSON-Text" class="headerlink" title="JSON Text"></a>JSON Text</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   &#123;</span><br><span class="line">        <span class="attr">"request"</span>: &#123;</span><br><span class="line">            <span class="attr">"uri"</span>: <span class="string">"/json"</span>,</span><br><span class="line">            <span class="attr">"json"</span>: &#123;</span><br><span class="line">                <span class="attr">"foo"</span>: <span class="string">"bar"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"response"</span>: &#123;</span><br><span class="line">            <span class="attr">"text"</span>: <span class="string">"foo"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:12306/json</code> ，将 <code>{&quot;foo&quot;: &quot;bar&quot;}</code> 作为字符串 POST 到服务器。</p>
+<h4 id="Operator"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</h4><h5 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h5><p>你可能想通过正则表达式来匹配你的 request，<strong>match</strong> 可以帮到你<br>比如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span>: &#123;</span><br><span class="line">          <span class="attr">"uri"</span>: &#123;</span><br><span class="line">              <span class="attr">"match"</span>: <span class="string">"/\\w*/foo"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span>: &#123;</span><br><span class="line">          <span class="attr">"text"</span>: <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>匹配任意类似 <code>http://localhost:12306/xxx/foo</code> 的请求，并返回：bar。其中的 <code>/\\w*</code> 表示以 <code>/</code> 开始，之后是任意数量的数字或字母。</p>
+<h5 id="Starts-With-Ends-With-Contain"><a href="#Starts-With-Ends-With-Contain" class="headerlink" title="Starts With, Ends With, Contain"></a>Starts With, Ends With, Contain</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span>: &#123;</span><br><span class="line">          <span class="attr">"uri"</span>: &#123;</span><br><span class="line">              <span class="attr">"startsWith"</span>: <span class="string">"/foo"</span></span><br><span class="line">              //<span class="string">"endsWith"</span>: <span class="string">"foo"</span></span><br><span class="line">              //<span class="string">"contain"</span>: <span class="string">"foo"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span>: &#123;</span><br><span class="line">          <span class="attr">"text"</span>: <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h3><h4 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h4><p>正如在之前的实例中看到的，直接返回一个文字内容非常简单：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:12306/</code> 将 foo 作为字符串 POST 到服务端，则会直接返回内容：bar。<br>和 request 一样，如果 response 内容很多的话，可以放在一个文件中返回。例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"file"</span> : <span class="string">"bar.response"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="Status-Code"><a href="#Status-Code" class="headerlink" title="Status Code"></a>Status Code</h4><p>Moco 支持 HTTP 状态码的返回：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"status"</span> : <span class="number">200</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="Header-1"><a href="#Header-1" class="headerlink" title="Header"></a>Header</h4><p>我们同样可以在 response 中指定 HTTP Header。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"headers"</span> : &#123;</span><br><span class="line">              <span class="attr">"content-type"</span> : <span class="string">"application/json"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h4><h5 id="Single-URL"><a href="#Single-URL" class="headerlink" title="Single URL"></a>Single URL</h5><p>我们可以像 proxy 一样，返回一个指定的 URL。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"proxy"</span> : <span class="string">"http://www.github.com"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>实际上，proxy 要更加的强大。它可以将所有的请求都指向指定的 url，包括 HTTP 的 method，version，header，content 等等。</p>
+<h5 id="Failover"><a href="#Failover" class="headerlink" title="Failover"></a>Failover</h5><p>除了基础功能之外，proxy 也支持 failover，这意味着如果远程服务暂时不能起作用的话，moco 服务将知道从本地的配置中修复。<br>例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"proxy"</span> : &#123;</span><br><span class="line">              <span class="attr">"url"</span> : <span class="string">"http://localhost:12306/unknown"</span>,</span><br><span class="line">              <span class="attr">"failover"</span> : <span class="string">"failover.json"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>Proxy 会将 request/response 成对地保存在你指定的 failover 文件中。如果 proxy 指定的目标不可用，proxy 将从这个文件中恢复。这个功能在开发环境下非常有用，尤其是当集成服务还没有稳定的时候。</p>
+<h5 id="Playback"><a href="#Playback" class="headerlink" title="Playback"></a>Playback</h5><p>Moco 也支持 playback，支持将远程的 request 和 response 保存到本地文件中。failover 和 playback 的不同支持在于，playback 只会当本地的 request 和 response 不可用时才会进入远程服务。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"proxy"</span> : &#123;</span><br><span class="line">              <span class="attr">"url"</span> : <span class="string">"http://localhost:12306/unknown"</span>,</span><br><span class="line">              <span class="attr">"playback"</span> : <span class="string">"playback.json"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="Redirect"><a href="#Redirect" class="headerlink" title="Redirect"></a>Redirect</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"uri"</span> : <span class="string">"/redirect"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"redirectTo"</span> : <span class="string">"http://www.github.com"</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="Cookie-1"><a href="#Cookie-1" class="headerlink" title="Cookie"></a>Cookie</h4><p>Cookie 同样可以放在 response 中。比如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"uri"</span> : <span class="string">"/cookie"</span></span><br><span class="line">        &#125;,</span><br><span class="line">      <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"cookies"</span> : &#123;</span><br><span class="line">            <span class="attr">"login"</span> : <span class="string">"true"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>当访问 <code>http://localhost:12306/cookie</code> 时，在返回的 Header 中将会看到：<code>Set-Cookie : login=true; Path=/</code></p>
+<h4 id="JSON-Response"><a href="#JSON-Response" class="headerlink" title="JSON Response"></a>JSON Response</h4><p>对于 JSON API， 直接返回一个 json object 就可以了。比如:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"request"</span>: &#123;</span><br><span class="line">            <span class="attr">"uri"</span>: <span class="string">"/json"</span></span><br><span class="line">          &#125;,</span><br><span class="line">        <span class="attr">"response"</span>: &#123;</span><br><span class="line">            <span class="attr">"json"</span>: &#123;</span><br><span class="line">                <span class="attr">"foo"</span> : <span class="string">"bar"</span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>访问 <code>http://localhost:12306/json</code>，则会返回 json：<code>{&quot;foo&quot;:&quot;bar&quot;}</code></p>
+<h2 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h2><h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>简单地启动 moco 服务时是通过命令来启动的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java -jar moco-runner-&lt;version&gt;-standalone.jar http -p 12306 -c foo.json</span><br></pre></td></tr></table></figure>
+<p>注意到这里有一个 <code>-c foo.json</code> ，此时只会将 <code>foo.json</code> 配置文件中的内容加载到服务中，如果仅仅通过以上的命令，则在调试多个接口时，需要不断的停止旧的服务、通过新的 json 配置文件启动新的服务，非常麻烦。</p>
+<blockquote>
+<p>Moco 支持动态加载配置文件，无论是修改还是添加配置文件都是不需要重启服务的。</p>
+</blockquote>
+<h4 id="配置文件的设置技巧"><a href="#配置文件的设置技巧" class="headerlink" title="配置文件的设置技巧"></a>配置文件的设置技巧</h4><p>配置文件的格式为一个 <strong>数组</strong> 类型的 JSON 格式，数组的每一个元素是一个 <code>request/response</code> 的配对。比如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        // 此处配置了一个 request</span><br><span class="line">        "request" : &#123;</span><br><span class="line">          "uri" : "/foo"</span><br><span class="line">        &#125;,</span><br><span class="line">        // 此处配置了对应于上方 request 的 response</span><br><span class="line">        "response" : &#123;</span><br><span class="line">          "text" : "bar"</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一个 request/response 对，当中的 request 可以没有，则此时访问 <code>http://localhost:12306/</code> 时，Moco 就会直接将配置的 response 中的内容返回。</p>
+</blockquote>
+<p>上面说了配置文件内容是 <strong>数组</strong> 类型的，所以我们还可以这样写：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"uri"</span> : <span class="string">"/foo"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"bar"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"request"</span> : &#123;</span><br><span class="line">          <span class="attr">"uri"</span> : <span class="string">"/foo2"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"response"</span> : &#123;</span><br><span class="line">          <span class="attr">"text"</span> : <span class="string">"bar2"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>此时我们加载了这个配置文件后，可以通过 <code>http://localhost:12306/foo</code> 和 <code>http://localhost:12306/foo2</code> 分别获取到 bar 和 bar2。这种对于需要测试的接口数量较少时，比较快速方便。</p>
+<h4 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h4><p>Moco 支持在全局的配置文件中引入其他配置文件，这样就可以分服务定义配置文件，便于管理。<br>例如你有两个不同路径的 API：<code>http://xxx.com/path1/login</code> 和 <code>http://xxx.com/path2/pay</code> （登录和支付接口）。<br>按照上一小节（4.1.1）所讲，我们可以写好 login 和 pay 的两个配置文件（或写在一起），分别设置 request 的 url 为 <code>/path1/login</code> 和 <code>/path2/pay</code> 。如果需要测试的接口很多，则不利于管理，且 path1、path2 这么混乱的分布于不同的配置文件中，对于以后想要更改也很不方便。</p>
+<p>正确的姿势应该是这样的：<br>同样写好 login.json 和 pay.json 两个配置文件，然后写一个 <strong>全局配置文件</strong> ，配置如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// config.json</span><br><span class="line">[</span><br><span class="line">	&#123;"context":"/path1", "include":"login.json"&#125;,</span><br><span class="line">	&#123;"context":"/path2", "include":"pay.json"&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>login 和 pay 两个文件没有特殊要求，和之前的写法一样。比如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// register.json</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "request": &#123;</span><br><span class="line">            "uri": "/register",</span><br><span class="line">            "method": "POST",</span><br><span class="line">            "json": &#123;</span><br><span class="line">                "phone":"18688886666",</span><br><span class="line">                "password":"123456"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        "response": &#123;</span><br><span class="line">            "json": &#123;</span><br><span class="line">                "state":"0"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">// login.json</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "request": &#123;</span><br><span class="line">            "uri": "/login",</span><br><span class="line">            "method": "POST",</span><br><span class="line">            "json": &#123;</span><br><span class="line">                "amount":"100"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        "response": &#123;</span><br><span class="line">            "json": &#123;</span><br><span class="line">                "state":"0"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>然后启动 Moco 服务的命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java -jar moco-runner-&lt;version&gt;-standalone.jar http -p 12306 -g config.json</span><br></pre></td></tr></table></figure>
+<p>要注意的是，最后指定的参数是 <strong><code>-g config.json</code></strong> !</p>
+<p>如果只是想引入多个 json 文件的话，全局配置文件中可以不使用 <code>context</code> 字段。比如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 不使用 context 字段的 config.json。</span><br><span class="line">[</span><br><span class="line">    &#123;"include":"login.json"&#125;,</span><br><span class="line">    &#123;"include":"pay.json"&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<hr>
+<p>（持续更新中…）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/服务器/" rel="tag"><i class="fa fa-tag"></i>&nbsp;&nbsp;服务器</a>
+          
+            <a href="/tags/接口/" rel="tag"><i class="fa fa-tag"></i>&nbsp;&nbsp;接口</a>
+          
+            <a href="/tags/测试/" rel="tag"><i class="fa fa-tag"></i>&nbsp;&nbsp;测试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/16/《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（二）/" rel="next" title="《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（二）">
+                <i class="fa fa-chevron-left"></i> 《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（二）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/03/使用-Moco-轻松搭建测试服务器/"
+     data-title="使用 Moco 轻松搭建测试服务器"
+     data-content=""
+     data-url="http://raykle.coding.me/2016/09/03/使用-Moco-轻松搭建测试服务器/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/03/使用-Moco-轻松搭建测试服务器/"
+           data-title="使用 Moco 轻松搭建测试服务器" data-url="http://raykle.coding.me/2016/09/03/使用-Moco-轻松搭建测试服务器/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.JPG"
+               alt="Raykle" />
+          <p class="site-author-name" itemprop="name">Raykle</p>
+          <p class="site-description motion-element" itemprop="description">(╯°□°）╯︵ ┻━┻</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/raykle" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/raykle" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/raykle" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Moco-介绍"><span class="nav-number">1.</span> <span class="nav-text">Moco 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速开始"><span class="nav-number">2.</span> <span class="nav-text">快速开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶使用"><span class="nav-number">3.</span> <span class="nav-text">进阶使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#description-字段作为注释"><span class="nav-number">3.1.</span> <span class="nav-text">description 字段作为注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Request"><span class="nav-number">3.2.</span> <span class="nav-text">Request</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URI"><span class="nav-number">3.2.1.</span> <span class="nav-text">URI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Query-Parameter"><span class="nav-number">3.2.2.</span> <span class="nav-text">Query Parameter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-Method"><span class="nav-number">3.2.3.</span> <span class="nav-text">HTTP Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Header"><span class="nav-number">3.2.4.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie"><span class="nav-number">3.2.5.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Form"><span class="nav-number">3.2.6.</span> <span class="nav-text">Form</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML"><span class="nav-number">3.2.7.</span> <span class="nav-text">XML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON-Request"><span class="nav-number">3.2.8.</span> <span class="nav-text">JSON Request</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JSON-Text"><span class="nav-number">3.2.8.1.</span> <span class="nav-text">JSON Text</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Operator"><span class="nav-number">3.2.9.</span> <span class="nav-text">Operator</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Match"><span class="nav-number">3.2.9.1.</span> <span class="nav-text">Match</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Starts-With-Ends-With-Contain"><span class="nav-number">3.2.9.2.</span> <span class="nav-text">Starts With, Ends With, Contain</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Response"><span class="nav-number">3.3.</span> <span class="nav-text">Response</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Content"><span class="nav-number">3.3.1.</span> <span class="nav-text">Content</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Status-Code"><span class="nav-number">3.3.2.</span> <span class="nav-text">Status Code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Header-1"><span class="nav-number">3.3.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Proxy"><span class="nav-number">3.3.4.</span> <span class="nav-text">Proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Single-URL"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">Single URL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Failover"><span class="nav-number">3.3.4.2.</span> <span class="nav-text">Failover</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Playback"><span class="nav-number">3.3.4.3.</span> <span class="nav-text">Playback</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redirect"><span class="nav-number">3.3.5.</span> <span class="nav-text">Redirect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie-1"><span class="nav-number">3.3.6.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON-Response"><span class="nav-number">3.3.7.</span> <span class="nav-text">JSON Response</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用技巧"><span class="nav-number">4.</span> <span class="nav-text">使用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">4.1.</span> <span class="nav-text">配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件的设置技巧"><span class="nav-number">4.1.1.</span> <span class="nav-text">配置文件的设置技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局配置文件"><span class="nav-number">4.1.2.</span> <span class="nav-text">全局配置文件</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Raykle</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"raykle"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FODbO6udo9aWmkqGpwtowl1Y-gzGzoHsz", "8GfbNbDyrb911zgzGf7g2UpF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement("script");
+    var curProtocol = window.location.protocol.split(":")[0];
+    if (curProtocol === "https") {
+        bp.src = "https://zz.bdstatic.com/linksubmit/push.js";        
+    }
+    else {
+        bp.src = "http://push.zhanzhang.baidu.com/push.js";
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>
