@@ -3,10 +3,31 @@
 
 
     
+  <url>
+    <loc>http://raykle.coding.me/2016/07/12/Test/</loc>
+    <lastmod>2017-04-15T09:01:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Test</title>
+        <pubTime>2016-07-12T03:52:13.000Z</pubTime>
+        
+        <tag>HelloWorld</tag>
+         
+        <tag>Test</tag>
+         
+         
+           
+             
+              <breadCrumb title="其他" url="http://raykle.coding.me/categories/%E5%85%B6%E4%BB%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://raykle.coding.me/2016/05/31/hello-world/</loc>
-    <lastmod>2016-09-07T13:51:37.000Z</lastmod>
+    <lastmod>2017-04-15T09:01:13.000Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>
@@ -20,57 +41,8 @@
 
     
   <url>
-    <loc>http://raykle.coding.me/2016/09/03/%E4%BD%BF%E7%94%A8-Moco-%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E6%B5%8B%E8%AF%95%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2016-09-07T13:40:19.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用 Moco 轻松搭建测试服务器</title>
-        <pubTime>2016-09-03T09:13:17.000Z</pubTime>
-        
-        <tag>服务器</tag>
-         
-        <tag>接口</tag>
-         
-        <tag>测试</tag>
-         
-         
-           
-             
-              <breadCrumb title="测试" url="http://raykle.coding.me/categories/%E6%B5%8B%E8%AF%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://raykle.coding.me/2016/08/16/%E3%80%8AiOS%20%E4%B8%8E%20OS%20X%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8B%20GCD%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
-    <lastmod>2016-09-03T08:33:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（二）</title>
-        <pubTime>2016-08-16T03:44:41.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-        <tag>GCD</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://raykle.coding.me/categories/iOS/"/>
-          
-             
-              <breadCrumb title="读书笔记" url="http://raykle.coding.me/categories/iOS/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://raykle.coding.me/2016/08/16/%E3%80%8AiOS%20%E4%B8%8E%20OS%20X%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8B%20GCD%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
-    <lastmod>2016-09-03T08:32:59.000Z</lastmod>
+    <lastmod>2017-04-15T09:01:13.000Z</lastmod>
     <data>
         <display>
         <title>《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（一）</title>
@@ -94,26 +66,54 @@
 
     
   <url>
-    <loc>http://raykle.coding.me/2016/07/12/Test/</loc>
-    <lastmod>2016-08-14T16:04:46.000Z</lastmod>
+    <loc>http://raykle.coding.me/2016/08/16/%E3%80%8AiOS%20%E4%B8%8E%20OS%20X%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8B%20GCD%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <lastmod>2017-04-15T09:01:13.000Z</lastmod>
     <data>
         <display>
-        <title>Test</title>
-        <pubTime>2016-07-12T03:52:13.000Z</pubTime>
+        <title>《iOS 与 OS X 多线程和内存管理》读书笔记之 GCD（二）</title>
+        <pubTime>2016-08-16T03:44:41.000Z</pubTime>
         
-        <tag>HelloWorld</tag>
+        <tag>iOS</tag>
          
-        <tag>Test</tag>
+        <tag>GCD</tag>
          
          
            
              
-              <breadCrumb title="其他" url="http://raykle.coding.me/categories/%E5%85%B6%E4%BB%96/"/>
+              <breadCrumb title="iOS" url="http://raykle.coding.me/categories/iOS/"/>
+          
+             
+              <breadCrumb title="读书笔记" url="http://raykle.coding.me/categories/iOS/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>
     </url>
 
+    
+  <url>
+    <loc>http://raykle.coding.me/2016/09/03/%E4%BD%BF%E7%94%A8-Moco-%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E6%B5%8B%E8%AF%95%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2017-04-15T09:01:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 Moco 轻松搭建测试服务器</title>
+        <pubTime>2016-09-03T09:13:17.000Z</pubTime>
+        
+        <tag>服务器</tag>
+         
+        <tag>接口</tag>
+         
+        <tag>测试</tag>
+         
+         
+           
+             
+              <breadCrumb title="测试" url="http://raykle.coding.me/categories/%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
     
 </urlset>
