@@ -7,9 +7,8 @@
       <title><![CDATA[iOS Universal Links]]></title>
       <url>http://raykle.coding.me/2017/04/16/iOS-Universal-Links/</url>
       <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>iOS 9 以前，从外部启动 App 都是通过 <code>URL Scheme</code> 实现跳转的。这种方式虽然可自定程度很高，能够巧妙地实现很多跳转，但是也存在很多弊端。</p>
-<p>在 2015 年苹果 WWDC 上，苹果宣布了 <code>Universal Links</code> 这项新技术，实现了在 iOS 9 及之后的系统上，在只做少量额外开发的条件下，不同 App 之间能够直接、顺畅、无缝衔接的跳转，让用户体验又提升了一个级别。</p>
+<p>在 2015 年苹果 WWDC 上，苹果宣布了 <code>Universal Links</code> 这项新技术，实现了在 iOS 9 及之后的系统上，在只做少量额外开发的条件下，不同 App 之间能够直接、顺畅、无缝衔接的跳转，让用户体验又提升了一个级别！</p>
 <hr>
-<a id="more"></a>
 <h2 id="URL-Scheme-VS-Universal-Links"><a href="#URL-Scheme-VS-Universal-Links" class="headerlink" title="URL Scheme  VS  Universal Links"></a>URL Scheme  VS  Universal Links</h2><h3 id="URL-schemes"><a href="#URL-schemes" class="headerlink" title="URL schemes"></a>URL schemes</h3><p>非常有效，能够让 app 之间彼此交流，传递数据。</p>
 <h4 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h4><ul>
 <li>需要提前加入到白名单，且会询问用户“是否打开‘xxx’应用”。</li>

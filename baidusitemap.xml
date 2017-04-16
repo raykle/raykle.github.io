@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://raykle.coding.me/2017/04/16/iOS-Universal-Links/</loc>
-    <lastmod>2017-04-16T18:28:56.000Z</lastmod>
+    <lastmod>2017-04-16T18:37:47.000Z</lastmod>
     <data>
         <display>
         <title>iOS Universal Links</title>
@@ -17,28 +17,6 @@
            
              
               <breadCrumb title="iOS" url="http://raykle.coding.me/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://raykle.coding.me/2016/07/12/Test/</loc>
-    <lastmod>2017-04-15T09:01:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>Test</title>
-        <pubTime>2016-07-12T03:52:13.000Z</pubTime>
-        
-        <tag>HelloWorld</tag>
-         
-        <tag>Test</tag>
-         
-         
-           
-             
-              <breadCrumb title="其他" url="http://raykle.coding.me/categories/%E5%85%B6%E4%BB%96/"/>
           
         </display>
     </data>
@@ -128,6 +106,28 @@
            
              
               <breadCrumb title="测试" url="http://raykle.coding.me/categories/%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://raykle.coding.me/2016/07/12/Test/</loc>
+    <lastmod>2017-04-15T09:01:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Test</title>
+        <pubTime>2016-07-12T03:52:13.000Z</pubTime>
+        
+        <tag>HelloWorld</tag>
+         
+        <tag>Test</tag>
+         
+         
+           
+             
+              <breadCrumb title="其他" url="http://raykle.coding.me/categories/%E5%85%B6%E4%BB%96/"/>
           
         </display>
     </data>
